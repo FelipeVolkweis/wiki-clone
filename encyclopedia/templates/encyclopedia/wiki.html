@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    {% for title in entries %}
+        {% if title|upper == entry1|upper %}
+            {{ title }}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+    {{ content | safe }}
+    <form class="my-3" action="{% url 'edit-page' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-secondary" value="Edit">
+        <input type= "hidden" name="edit_id" value="{{ entry1 }}">
+    </form>    
+{% endblock %}
